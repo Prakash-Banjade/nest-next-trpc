@@ -3,7 +3,13 @@
   "private": true,
   "scripts": {
     "build": "turbo build",
+    "build:server": "turbo run build --filter=server",
+    "build:web": "turbo run build --filter=web",
+    "start:server": "turbo run start --filter=server",
+    "start:web": "turbo run start --filter=web",
     "dev": "turbo dev",
+    "dev:server": "turbo run dev --filter=server",
+    "dev:web": "turbo run dev --filter=web",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },

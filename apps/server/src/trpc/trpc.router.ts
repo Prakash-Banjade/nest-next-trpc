@@ -5,15 +5,18 @@ import * as trpcExpress from "@trpc/server/adapters/express";
 
 @Injectable()
 export class TrpcRouter {
-    constructor(private readonly trpcService: TrpcService) { }
+    public appRouter;
 
-    appRouter = this.trpcService.router({
-        hello: this.trpcService.procedure
-            .input(z.object({ name: z.string().optional() }))
-            .query(({ input }) => {
-                return `Hello ${input?.name ?? 'World'}!`;
-            })
-    })
+    constructor(private readonly trpcService: TrpcService) {
+        this.appRouter = this.trpcService.router({
+            hello: this.trpcService.procedure
+                .input(z.object({ name: z.string().optional() }))
+                .query(({ input }) => {
+                    return `Hello ${input?.name ?? 'World'}!`;
+                }),
+        });
+    }
+
 
     async applyMiddleware(app: INestApplication) { // apply trpc middleware to express app
         app.use(
